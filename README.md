@@ -131,7 +131,7 @@ Open `index.html` in your browser.
 
 ## Live Demo
 
-[View Live Application](https://james-damptey-mightyx.github.io/Neon-GPA-Calculator/)
+[View Live Application](https://james-damptey-mightyx.github.io/High-GPA-Calculator/)
 
 ---
 
