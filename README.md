@@ -1,4 +1,4 @@
-# Neon GPA — Futuristic Student GPA Calculator
+# High GPA — Futuristic Student GPA Calculator
 
 A futuristic and responsive GPA Calculator designed for university students in Ghana.  
 The application helps students calculate weighted GPAs using the Ghanaian university grading system while providing modern analytics, academic classification insights, PDF report generation, and persistent calculation history.
