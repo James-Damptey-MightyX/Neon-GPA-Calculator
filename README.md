@@ -128,17 +128,9 @@ cd neon-gpa
 Open `index.html` in your browser.
 
 ---
+## Live Demo
 
-## Screenshots
-
-### Desktop Dashboard
-Add screenshot here.
-
-### GPA Result Panel
-Add screenshot here.
-
-### PDF Report Export
-Add screenshot here.
+[View Live Application]([https://yourusername.github.io/Neon-GPA/](https://james-damptey-mightyx.github.io/Neon-GPA-Calculator/))
 
 ---
 
