@@ -116,7 +116,7 @@ Neon-GPA/
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/James-Damptey-MightyX/Neon-GPA-Calculator
+git clone https://github.com/James-Damptey-MightyX/High-GPA-Calculator
 ```
 
 ### Open the Project
