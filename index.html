@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A futuristic student GPA calculator for Ghanaian university grading systems.">
+  <title>Neon GPA | Student GPA Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="theme-glow theme-glow-one" aria-hidden="true"></div>
+  <div class="theme-glow theme-glow-two" aria-hidden="true"></div>
+  <div class="particle-field" id="particleField" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Neon GPA home">
+      <span class="brand-mark">NG</span>
+      <span>
+        <strong>Neon GPA</strong>
+        <small>Student dashboard</small>
+      </span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#calculator">Calculator</a>
+      <a href="#history">History</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark and light theme">
+      <span class="toggle-icon" aria-hidden="true">◐</span>
+      <span class="toggle-label">Theme</span>
+    </button>
+  </header>
+
+  <main id="home">
+    <section class="hero panel reveal">
+      <div class="hero-copy">
+        <p class="eyebrow">University GPA calculator for Ghana</p>
+        <h2>Track your academic performance.</h2>
+        <p class="hero-text">
+          Add courses, calculate weighted GPA instantly, and export polished reports.
+        </p>
+
+        <div class="hero-actions">
+          <a class="primary-button" href="#calculator">Open calculator</a>
+          <button class="secondary-button" id="loadDemoBtn" type="button">Load sample courses</button>
+        </div>
+
+        <div class="hero-stats" aria-label="Quick stats">
+          <article class="stat-card">
+            <span>Courses</span>
+            <strong id="quickCourseCount">0</strong>
+          </article>
+          <article class="stat-card">
+            <span>Credits</span>
+            <strong id="quickCreditCount">0</strong>
+          </article>
+          <article class="stat-card">
+            <span>GPA</span>
+            <strong id="quickGpaValue">0.00</strong>
+          </article>
+        </div>
+      </div>
+
+      <aside class="hero-visual" aria-hidden="true">
+        <div class="orbit-card">
+          <div class="orbit-ring orbit-ring-one"></div>
+          <div class="orbit-ring orbit-ring-two"></div>
+          <div class="orbit-core">
+            <span>GPA</span>
+            <strong id="heroGpa">0.00</strong>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="dashboard-grid" id="calculator">
+      <article class="panel dashboard-panel reveal">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">GPA input dashboard</p>
+            <h2>Course planner</h2>
+          </div>
+          <button class="add-course-button" id="addCourseBtn" type="button">
+            <span aria-hidden="true">+</span>
+            Add course
+          </button>
+        </div>
+
+        <form id="gpaForm" novalidate>
+          <section class="student-info-panel" aria-label="Student information">
+            <div class="student-info-heading">
+              <p class="eyebrow">Student identity</p>
+              <h3>Academic Profile</h3>
+            </div>
+
+            <div class="student-info-grid">
+              <label class="student-field">
+                <span>Student Full Name *</span>
+                <input class="student-input" id="studentName" name="studentName" type="text" placeholder="e.g. Damptey James" maxlength="80" required>
+              </label>
+
+              <label class="student-field">
+                <span>Student ID / Index Number</span>
+                <input class="student-input" id="studentId" name="studentId" type="text" placeholder="e.g. UEB-24-0123" maxlength="50">
+              </label>
+
+              <label class="student-field">
+                <span>Department / Program</span>
+                <input class="student-input" id="studentProgram" name="studentProgram" type="text" placeholder="e.g. Computer Science" maxlength="80">
+              </label>
+
+              <label class="student-field">
+                <span>Academic Level</span>
+                <input class="student-input" id="academicLevel" name="academicLevel" type="text" placeholder="e.g. Level 300" maxlength="30">
+              </label>
+
+              <label class="student-field">
+                <span>Semester</span>
+                <select class="student-input" id="semester" name="semester">
+                  <option value="First Semester">First Semester</option>
+                  <option value="Second Semester">Second Semester</option>
+                  <option value="Third Semester">Third Semester</option>
+                  <option value="Special Semester">Special Semester</option>
+                </select>
+              </label>
+            </div>
+          </section>
+
+          <div class="table-wrap" role="region" aria-label="Dynamic course table">
+            <table class="course-table">
+              <thead>
+                <tr>
+                  <th>Course name</th>
+                  <th>Credit hours</th>
+                  <th>Grade</th>
+                  <th>Points</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="courseTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="form-actions">
+            <button class="primary-button" type="submit">Calculate GPA</button>
+            <button class="secondary-button" id="resetBtn" type="button">Clear form</button>
+            <button class="ghost-button" id="clearHistoryBtn" type="button">Clear history</button>
+          </div>
+        </form>
+      </article>
+
+      <aside class="stacked-panels">
+        <article class="panel analytics-panel reveal">
+          <div class="section-heading compact">
+            <div>
+              <p class="eyebrow">Results panel</p>
+              <h2>GPA analytics</h2>
+            </div>
+          </div>
+
+          <div class="result-card" id="resultCard" aria-live="polite">
+            <div>
+              <span class="result-student" id="resultStudentSummary">Performance Summary</span>
+              <span class="result-label">Current GPA</span>
+              <strong id="gpaValue">0.00</strong>
+            </div>
+            <span class="classification-badge" id="gpaClassification">Pass</span>
+          </div>
+
+          <div class="metrics-grid">
+            <article class="metric-card">
+              <span>Total credits</span>
+              <strong id="totalCredits">0</strong>
+            </article>
+            <article class="metric-card">
+              <span>Total grade points</span>
+              <strong id="totalGradePoints">0.00</strong>
+            </article>
+            <article class="metric-card">
+              <span>Courses</span>
+              <strong id="totalCourses">0</strong>
+            </article>
+            <article class="metric-card">
+              <span>Progress</span>
+              <strong id="gpaProgressText">0%</strong>
+            </article>
+          </div>
+
+          <div class="progress-section">
+            <div class="progress-header">
+              <span>GPA progress</span>
+              <span id="progressLabel">Keep pushing</span>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <div class="progress-fill" id="gpaProgressBar"></div>
+            </div>
+          </div>
+
+          <div class="validation-note" id="validationNote">
+            Enter valid course details to calculate your GPA.
+          </div>
+        </article>
+      </aside>
+    </section>
+
+    <section class="panel info-panel reveal" id="about">
+      <div class="section-heading compact">
+        <div>
+          <p class="eyebrow">Workflow</p>
+          <h2>How it works</h2>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <article>
+          <h3>1. Add your courses</h3>
+          <p>Enter the course name, credit hours, and the grade earned for each module in the semester.</p>
+        </article>
+        <article>
+          <h3>2. Calculate instantly</h3>
+          <p>The app uses Ghanaian grading points to compute total credits, weighted grade points, and GPA.</p>
+        </article>
+        <article>
+          <h3>3. Save and export</h3>
+          <p>Review the calculation history in your browser and export a clean PDF report for records.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel history-panel reveal" id="history">
+      <div class="section-heading compact">
+        <div>
+          <p class="eyebrow">Local storage</p>
+          <h2>Calculation history</h2>
+        </div>
+        <div class="history-head-actions">
+          <span class="history-count" id="historyCount">0 saved</span>
+          <button id="clearHistoryPanelBtn" class="ghost-button" type="button">Clear</button>
+        </div>
+      </div>
+
+      <div class="history-list" id="historyList" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="footer" id="siteFooter">
+    <div class="footer-branding">
+      <p class="footer-credit">Designed and Developed by Damptey James-MightyX</p>
+      <p class="footer-rights">© <span id="currentYear">2026</span> Damptey James-MightyX. All Rights Reserved.</p>
+    </div>
+    <p>Keyboard friendly. Mobile responsive. Local storage enabled.</p>
+  </footer>
+
+  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>
