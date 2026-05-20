@@ -116,7 +116,7 @@ Neon-GPA/
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/James-Damptey-MightyX/neon-gpa.git
+git clone https://github.com/James-Damptey-MightyX/Neon-GPA-Calculator
 ```
 
 ### Open the Project
@@ -128,9 +128,10 @@ cd neon-gpa
 Open `index.html` in your browser.
 
 ---
+
 ## Live Demo
 
-[View Live Application]([https://yourusername.github.io/Neon-GPA/](https://james-damptey-mightyx.github.io/Neon-GPA-Calculator/))
+[View Live Application](https://james-damptey-mightyx.github.io/Neon-GPA-Calculator/)
 
 ---
 
